@@ -13,3 +13,5 @@ export const productDefault: interfaces.IPost = {
   likes: [],
   comments: [],
 }
+
+export const apiUrl: string = 'https://social-network-api-rus.herokuapp.com'

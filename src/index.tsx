@@ -5,6 +5,8 @@ import { RecoilRoot } from 'recoil'
 import App from './App'
 import './index.css'
 
+console.log('loaded')
+
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>

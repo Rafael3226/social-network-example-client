@@ -7,8 +7,10 @@ import UserPage from './pages/UserPage'
 import SingupPage from './pages/UserPage'
 import PostsPage from './pages/PostsPage'
 import FeedPage from './pages/FeedPage'
+import useFirebase from './hooks/useFirebase'
 
 export default function App() {
+  useFirebase()
   return (
     <BrowserRouter>
       <Routes>
