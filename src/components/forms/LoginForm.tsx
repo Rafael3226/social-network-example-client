@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
+import { Login } from '../../api/user'
+import useLocalStorage from '../../hooks/useLocalStorage'
 import { errorAtom } from '../../recoil/error'
 import { loadingAtom } from '../../recoil/loading'
+import { userAtom } from '../../recoil/user'
 import Button from '../basic/Button'
 import Input from '../basic/Input'
 
 function LoginForm() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const setError = useSetRecoilState(errorAtom)
   const setLoading = useSetRecoilState(loadingAtom)
+  const setUsuario = useSetRecoilState(userAtom)
   useEffect(setDefault, [])
 
-  function handleLogin() {
+  async function handleLogin() {
     if (!password || !email) {
       setError('Please fill in all the information')
     } else {
-      setError('Not implemented')
       setLoading(true)
+      const auth: any = await Login({ email, password })
+      if (auth.data) {
+        useLocalStorage.set('auth', auth)
+        setUsuario(auth.data)
+        navigate('/', { replace: true })
+      } else {
+        setError('The authentication failed')
+      }
+      setLoading(false)
     }
   }
   function setDefault() {

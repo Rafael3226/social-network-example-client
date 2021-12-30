@@ -1,18 +1,15 @@
 import React from 'react'
 
-function DisplayImg({ list }: { list: string[] }) {
+function DisplayImg({ src, style }: { src: string; style?: object }) {
+  if (src === '') return <></>
   return (
     <div className="flex justify-center gap-4 my-4">
-      {list.length !== 0 &&
-        list.map((url, key) => (
-          <img
-            key={key}
-            src={url}
-            style={{ height: 300, width: 300 }}
-            alt={`uploaded #${key}`}
-            className="bg-neutral-300"
-          ></img>
-        ))}
+      <img
+        src={src}
+        style={style || { height: 300, width: 300 }}
+        alt={JSON.stringify(src)}
+        className="bg-neutral-300"
+      ></img>
     </div>
   )
 }

@@ -16,3 +16,8 @@ export interface IUser {
   password: string
   image: string
 }
+
+export interface IApiResponse<T> {
+  data: T
+  message: string
+}

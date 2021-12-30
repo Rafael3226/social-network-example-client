@@ -1,11 +1,10 @@
 import { initializeApp } from '@firebase/app'
-import axios from 'axios'
-import { apiUrl } from '../types/defaults'
+import FirebaseKey from '../api/keys'
 
 export default async function useFirebase() {
-  const key = await axios.get(`${apiUrl}/keys/firebase`)
+  const key = await FirebaseKey()
   initializeApp({
-    apiKey: String(key),
+    apiKey: key,
     authDomain: 'onlinestore-dd493.firebaseapp.com',
     projectId: 'onlinestore-dd493',
     storageBucket: 'onlinestore-dd493.appspot.com',

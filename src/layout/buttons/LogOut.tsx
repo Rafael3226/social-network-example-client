@@ -4,11 +4,13 @@ import { useRecoilState } from 'recoil'
 import { userAtom } from '../../recoil/user'
 import { IUser } from '../../interfaces/interfaces'
 import { userDefault } from '../../types/defaults'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 function LogOut() {
   const [user, setUser] = useRecoilState<IUser>(userAtom)
   function handleLogOut() {
     setUser(userDefault)
+    useLocalStorage.clear()
   }
   if (user.email === '') return <></>
   return (

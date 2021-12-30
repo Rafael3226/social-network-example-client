@@ -15,3 +15,4 @@ export const productDefault: interfaces.IPost = {
 }
 
 export const apiUrl: string = 'https://social-network-api-rus.herokuapp.com'
+// export const apiUrl: string = 'http://localhost:5500'
