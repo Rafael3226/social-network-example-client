@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { errorAtom } from '../../recoil/error'
 import Button from '../basic/Button'
 import Input from '../basic/Input'
@@ -7,15 +7,15 @@ import UploadImg from '../upload/UploadImg'
 import DisplayImg from '../upload/DisplayImg'
 import { imageUrlAtom } from '../../recoil/imageUrl'
 import { userAtom } from '../../recoil/user'
-import { CreateUser } from '../../api/user'
+import { CreateUser, UpdateUser } from '../../api/user'
 import { loadingAtom } from '../../recoil/loading'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import useLocalStorage from '../../hooks/useLocalStorage'
 
-function UserForm() {
+function SingupForm() {
   const navigate = useNavigate()
 
-  const setUsuario = useSetRecoilState(userAtom)
+  const [user, setUser] = useRecoilState(userAtom)
   const setError = useSetRecoilState(errorAtom)
   const setLoading = useSetRecoilState(loadingAtom)
   const [email, setEmail] = useState<string>('')
@@ -23,11 +23,12 @@ function UserForm() {
   const [password1, setPassword1] = useState<string>('')
   const [password2, setPassword2] = useState<string>('')
 
-  const imageUrl = useRecoilValue(imageUrlAtom)
+  const location = useLocation()
 
+  const [imageUrl, setImageUrl] = useRecoilState(imageUrlAtom)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => setUsuario((u) => ({ ...u, image: imageUrl })), [imageUrl])
-  useEffect(setDefault, [])
+  useEffect(() => setUser((u) => ({ ...u, image: imageUrl })), [imageUrl])
+  useEffect(setDefault, [user])
   async function handleSingup(evt: React.MouseEvent<HTMLButtonElement>) {
     evt.preventDefault()
 
@@ -38,28 +39,57 @@ function UserForm() {
     } else {
       setError('')
       setLoading(true)
-      const res: any = await CreateUser({
-        name,
-        password: password1,
-        email,
-        image: imageUrl,
-      })
+      let res: any
+      if (user._id === '') {
+        res = await CreateUser({
+          name,
+          password: password1,
+          email,
+          image: imageUrl,
+        })
+      } else {
+        res = await UpdateUser({
+          _id: user._id,
+          name,
+          password: password1,
+          email,
+          image: imageUrl,
+        })
+      }
       if (res.message) {
         setError(res.message)
       } else {
         useLocalStorage.set('auth', res)
-        setUsuario(res.data)
+        setUser(res.data)
         navigate('/', { replace: true })
       }
       setLoading(true)
     }
   }
   function setDefault() {
-    setEmail('')
-    setName('')
-    setPassword1('')
-    setPassword2('')
+    if (user._id !== '') {
+      setEmail(user.email)
+      setName(user.name)
+      setPassword1('')
+      setPassword2('')
+      if (imageUrl === '') setImageUrl(user.image)
+    } else {
+      setEmail('')
+      setName('')
+      setPassword1('')
+      setPassword2('')
+      setImageUrl('')
+    }
   }
+  let auth
+  try {
+    auth = useLocalStorage.get('auth')
+  } catch {}
+
+  if (auth && location.pathname !== '/profile') {
+    return <Navigate to="/profile" />
+  }
+
   return (
     <>
       <Input
@@ -88,10 +118,12 @@ function UserForm() {
       />
       <UploadImg />
       <DisplayImg src={imageUrl} />
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center my-4">
         <div className="w-1/2">
           <Button className="w-full" type="reset" onClick={handleSingup}>
-            <span className="text-white">Singup</span>
+            <span className="text-white">
+              {user._id === '' ? 'Singup' : 'Update'}
+            </span>
           </Button>
         </div>
       </div>
@@ -99,4 +131,4 @@ function UserForm() {
   )
 }
 
-export default UserForm
+export default SingupForm

@@ -12,7 +12,8 @@ function LogOut() {
     setUser(userDefault)
     useLocalStorage.clear()
   }
-  if (user.email === '') return <></>
+
+  if (user._id === '') return <></>
   return (
     <Button type="button" onClick={handleLogOut}>
       <p className="w-full text-white">Logout</p>

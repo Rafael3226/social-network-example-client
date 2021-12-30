@@ -3,8 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import RequireAuth from './containers/RequireAuth'
 import DefaultPage from './pages/DefaultPage'
 import LoginPage from './pages/LoginPage'
-import UserPage from './pages/UserPage'
-import SingupPage from './pages/UserPage'
+import SingupPage from './pages/SingupPage'
 import PostsPage from './pages/PostsPage'
 import FeedPage from './pages/FeedPage'
 import useFirebase from './hooks/useFirebase'
@@ -26,10 +25,10 @@ export default function App() {
             }
           />
           <Route
-            path="user"
+            path="profile"
             element={
               <RequireAuth>
-                <UserPage />
+                <SingupPage />
               </RequireAuth>
             }
           />

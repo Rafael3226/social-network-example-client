@@ -6,7 +6,7 @@ function NavLinks() {
     <>
       <NavLink to="/">Posts</NavLink>
       <NavLink to="/feed">Feed</NavLink>
-      <NavLink to="/user">Profile</NavLink>
+      <NavLink to="/profile">Profile</NavLink>
     </>
   )
 }

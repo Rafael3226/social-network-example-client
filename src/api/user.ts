@@ -35,3 +35,26 @@ export async function CreateUser({
   })
   return res
 }
+
+export async function UpdateUser({
+  _id,
+  name,
+  image,
+  password,
+  email,
+}: {
+  _id: string
+  name: string
+  image: string
+  password: string
+  email: string
+}) {
+  const res: IApiResponse<IUser> = await axios.put(`${apiUrl}/user/update`, {
+    _id,
+    name,
+    password,
+    email,
+    image,
+  })
+  return res
+}

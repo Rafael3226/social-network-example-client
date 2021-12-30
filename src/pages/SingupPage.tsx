@@ -3,18 +3,18 @@ import DarkMode from '../containers/DarkMode'
 import ResponsiveCenter from '../containers/ResponsiveCenter'
 import ErrorAlert from '../components/alerts/ErrorAlert'
 import NavBar from '../layout/NavBar'
-import UserForm from '../components/forms/UserForm'
+import SingupForm from '../components/forms/SingupForm'
 
-function UserPage() {
+function SingupPage() {
   return (
     <DarkMode>
       <NavBar />
       <ResponsiveCenter>
-        <UserForm />
+        <SingupForm />
         <ErrorAlert />
       </ResponsiveCenter>
     </DarkMode>
   )
 }
 
-export default UserPage
+export default SingupPage
