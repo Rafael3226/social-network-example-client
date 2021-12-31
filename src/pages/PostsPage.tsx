@@ -1,16 +1,16 @@
 import React from 'react'
 import Posts from '../components/lists/Posts'
+import Container from '../containers/Container'
 import DarkMode from '../containers/DarkMode'
-import ResponsiveCenter from '../containers/ResponsiveCenter'
 import NavBar from '../layout/NavBar'
 
 function PostsPage() {
   return (
     <DarkMode>
       <NavBar />
-      <ResponsiveCenter>
+      <Container>
         <Posts />
-      </ResponsiveCenter>
+      </Container>
     </DarkMode>
   )
 }

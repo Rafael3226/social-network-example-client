@@ -8,6 +8,10 @@ export async function GetFeed({ _id }: { _id: string }) {
   )
   return res
 }
+export async function GetPosts() {
+  const res: IApiResponse<IPost[]> = await axios.get(`${apiUrl}/post/list`)
+  return res
+}
 
 export async function SaveComments({
   _id,

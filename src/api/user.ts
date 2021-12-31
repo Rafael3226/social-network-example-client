@@ -58,3 +58,10 @@ export async function UpdateUser({
   })
   return res
 }
+
+export async function GetUser({ _id }: { _id: string }) {
+  const res: IApiResponse<IUser> = await axios.get(
+    `${apiUrl}/user/get?id=${_id}`,
+  )
+  return res
+}

@@ -3,6 +3,7 @@ export default class useLocalStorage {
     return JSON.parse(localStorage.getItem(tag) || '')
   }
   static set(tag: string, data: object) {
+    localStorage.removeItem(tag)
     localStorage.setItem(tag, JSON.stringify(data))
   }
   static remove(tag: string) {

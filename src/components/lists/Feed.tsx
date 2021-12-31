@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { CreatePost, GetFeed, SaveComments } from '../../api/post'
+import { CreatePost, GetFeed } from '../../api/post'
 import { IPost } from '../../interfaces/interfaces'
 import { postsAtom } from '../../recoil/posts'
 import { userAtom } from '../../recoil/user'

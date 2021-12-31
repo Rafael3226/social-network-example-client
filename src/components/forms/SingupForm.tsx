@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { errorAtom } from '../../recoil/error'
 import Button from '../basic/Button'
 import Input from '../basic/Input'
@@ -28,7 +28,9 @@ function SingupForm() {
   const [imageUrl, setImageUrl] = useRecoilState(imageUrlAtom)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setUser((u) => ({ ...u, image: imageUrl })), [imageUrl])
-  useEffect(setDefault, [user])
+  useEffect(() => {
+    setDefault()
+  }, [user])
   async function handleSingup(evt: React.MouseEvent<HTMLButtonElement>) {
     evt.preventDefault()
 
@@ -60,18 +62,18 @@ function SingupForm() {
         setError(res.message)
       } else {
         useLocalStorage.set('auth', res)
-        setUser(res.data.data)
+        setUser(res.data)
         navigate('/', { replace: true })
       }
       setLoading(true)
     }
   }
-  function setDefault() {
+  async function setDefault() {
     if (user._id !== '') {
       setEmail(user.email)
       setName(user.name)
-      setPassword1('')
-      setPassword2('')
+      setPassword1(user.password)
+      setPassword2(user.password)
       if (imageUrl === '') setImageUrl(user.image)
     } else {
       setEmail('')
