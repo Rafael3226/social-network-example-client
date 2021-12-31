@@ -16,5 +16,5 @@ export const postDefault: interfaces.IPost = {
   comments: [],
 }
 
-// export const apiUrl: string = 'https://social-network-api-rus.herokuapp.com'
-export const apiUrl: string = 'http://localhost:5500'
+export const apiUrl: string = 'https://social-network-api-rus.herokuapp.com'
+// export const apiUrl: string = 'http://localhost:5500'
