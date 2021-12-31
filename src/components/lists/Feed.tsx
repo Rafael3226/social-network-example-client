@@ -6,7 +6,7 @@ import { postsAtom } from '../../recoil/posts'
 import { userAtom } from '../../recoil/user'
 import Button from '../basic/Button'
 import Label from '../basic/Label'
-import Post from '../basic/Post'
+import Post from './Post'
 import TextArea from '../basic/TextArea'
 
 function Feed() {

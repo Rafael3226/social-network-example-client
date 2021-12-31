@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { GetFeed, SaveComments } from '../../api/post'
+import { useRecoilValue } from 'recoil'
+import { SaveComments } from '../../api/post'
 import { IComment } from '../../interfaces/interfaces'
-import { postsAtom } from '../../recoil/posts'
 import { userAtom } from '../../recoil/user'
-import Button from './Button'
-import Comment from './Comment'
-import TextArea from './TextArea'
+import Button from '../basic/Button'
+import Comment from '../basic/Comment'
+import TextArea from '../basic/TextArea'
 
 function Post({
   _id,
