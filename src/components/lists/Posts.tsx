@@ -67,6 +67,8 @@ function Posts() {
                   loadFeed={LoadFeed}
                   comments={post.comments}
                   description={post.description}
+                  userImage={post.user.image}
+                  userName={post.user.name}
                 />
               ))}
           </div>

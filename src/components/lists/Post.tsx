@@ -5,6 +5,7 @@ import { IComment } from '../../interfaces/interfaces'
 import { userAtom } from '../../recoil/user'
 import Button from '../basic/Button'
 import Comment from '../basic/Comment'
+import Label from '../basic/Label'
 import TextArea from '../basic/TextArea'
 
 function Post({
@@ -12,11 +13,15 @@ function Post({
   comments,
   description,
   loadFeed,
+  userImage,
+  userName,
 }: {
   _id: string
   comments: IComment[]
   description: string
   loadFeed: Function
+  userImage: string
+  userName: string
 }) {
   const user = useRecoilValue(userAtom)
   const [comment, setComment] = useState<string>('')
@@ -27,8 +32,25 @@ function Post({
     loadFeed()
     setComment('')
   }
+  console.log(userImage)
+
   return (
     <div className="w-full border border-neutral-300 rounded  p-4 my-1  grid grid-cols-1">
+      <div className="flex flex-row">
+        <div className="ml-4 mr-2">
+          {userImage && (
+            <img
+              className="h-auto flex-none bg-cover rounded text-center overflow-hidden"
+              src={userImage}
+              alt="userImage"
+              style={{ height: 100, width: 'auto' }}
+            ></img>
+          )}
+        </div>
+        <div>
+          <Label>{userName}</Label>
+        </div>
+      </div>
       <div className="mx-4">
         <p className="text-primary-500 dark:text-primary-300 font-bold text-xl">
           {description}
@@ -59,6 +81,7 @@ function Post({
               key={index}
               description={c.description}
               userName={c.user.name}
+              imgURL={c.user.image}
             />
           ))}
       </div>
