@@ -26,7 +26,7 @@ function LoginForm() {
       const auth: any = await Login({ email, password })
       if (auth.data) {
         useLocalStorage.set('auth', auth)
-        setUser(auth.data)
+        setUser(auth.data.data)
         navigate('/', { replace: true })
       } else {
         setError('The authentication failed')

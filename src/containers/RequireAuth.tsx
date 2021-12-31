@@ -5,21 +5,22 @@ import useLocalStorage from '../hooks/useLocalStorage'
 import { userAtom } from '../recoil/user'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
-  const [{ _id }, setUsuario] = useRecoilState(userAtom)
+  const [user, setUser] = useRecoilState(userAtom)
+  console.log(user)
 
   useEffect(() => {
-    if (_id === '') {
+    if (user._id === '') {
       try {
         const auth = useLocalStorage.get('auth')
         if (auth) {
-          setUsuario(auth.data.data)
+          setUser(auth.data.data)
         }
       } catch {}
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [_id])
+  }, [user._id])
 
-  if (_id === '') {
+  if (user._id === '') {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience

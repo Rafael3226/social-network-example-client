@@ -60,7 +60,7 @@ function SingupForm() {
         setError(res.message)
       } else {
         useLocalStorage.set('auth', res)
-        setUser(res.data)
+        setUser(res.data.data)
         navigate('/', { replace: true })
       }
       setLoading(true)

@@ -8,7 +8,7 @@ export const userDefault: interfaces.IUser = {
   image: '',
 }
 
-export const productDefault: interfaces.IPost = {
+export const postDefault: interfaces.IPost = {
   _id: '',
   user: userDefault,
   description: '',
