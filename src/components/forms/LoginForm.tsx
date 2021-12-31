@@ -16,7 +16,7 @@ function LoginForm() {
   const setError = useSetRecoilState(errorAtom)
   const setLoading = useSetRecoilState(loadingAtom)
   const [user, setUser] = useRecoilState(userAtom)
-  useEffect(setDefault, [])
+  useEffect(setDefault, [user._id])
 
   async function handleLogin() {
     if (!password || !email) {

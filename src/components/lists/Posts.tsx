@@ -17,6 +17,7 @@ function Posts() {
 
   useEffect(() => {
     LoadFeed()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user._id])
 
   async function LoadFeed() {

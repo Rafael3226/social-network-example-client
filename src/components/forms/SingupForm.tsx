@@ -30,6 +30,7 @@ function SingupForm() {
   useEffect(() => setUser((u) => ({ ...u, image: imageUrl })), [imageUrl])
   useEffect(() => {
     setDefault()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
   async function handleSingup(evt: React.MouseEvent<HTMLButtonElement>) {
     evt.preventDefault()
