@@ -6,8 +6,6 @@ import { userAtom } from '../recoil/user'
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const [user, setUser] = useRecoilState(userAtom)
-  console.log(user)
-
   useEffect(() => {
     if (user._id === '') {
       try {
